@@ -1,6 +1,5 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
 
@@ -13,34 +12,40 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            
+
             //DataBaseAdded(carManager, colorManager, brandManager);
-            
-            foreach (var car in carManager.GetAll())
+            var result = carManager.GetAll();
+            if (result.Success == true)
             {
-                Console.WriteLine($"Araba Adı: {car.CarName} Fiyatı:{car.DailyPrice}");
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine($"Araba Adı: {car.CarName} Fiyatı:{car.DailyPrice}");
+                }
             }
-
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
             Console.WriteLine("----------------------------------------------");
 
-            foreach (var car in carManager.GetCarsByColorId(1))
-            {
-                Console.WriteLine($"Araba Adı: {car.CarName} Fiyatı:{car.DailyPrice}");
-            }
+            //foreach (var car in carManager.GetCarsByColorId(1))
+            //{
+            //    Console.WriteLine($"Araba Adı: {car.CarName} Fiyatı:{car.DailyPrice}");
+            //}
 
-            Console.WriteLine("----------------------------------------------");
+            //Console.WriteLine("----------------------------------------------");
 
-            foreach (var car in carManager.GetCarsByBrandId(2))
-            {
-                Console.WriteLine($"Araba Adı: {car.CarName} Fiyatı:{car.DailyPrice}");
-            }
+            //foreach (var car in carManager.GetCarsByBrandId(2))
+            //{
+            //    Console.WriteLine($"Araba Adı: {car.CarName} Fiyatı:{car.DailyPrice}");
+            //}
 
-            Console.WriteLine("----------------------------------------------");
+            //Console.WriteLine("----------------------------------------------");
 
-            foreach (var car in carManager.GetCarDetails())
-            {
-                Console.WriteLine($"Adı: {car.CarName} / Fiyat:{car.DailyPrice} / Marka:{car.BrandName} / Renk:{car.ColorName}");
-            }
+            //foreach (var car in carManager.GetCarDetails())
+            //{
+            //    Console.WriteLine($"Adı: {car.CarName} / Fiyat:{car.DailyPrice} / Marka:{car.BrandName} / Renk:{car.ColorName}");
+            //}
 
 
             //Console.WriteLine("----------------------------------------------");
