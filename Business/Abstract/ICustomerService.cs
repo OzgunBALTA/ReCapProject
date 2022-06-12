@@ -1,4 +1,4 @@
-﻿using Core.Utilities.Abstract;
+﻿using Core.Utilities.Results.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace Business.Abstract
         IResult Add(Customer customer);
         IResult Delete(Customer customer);
         IResult Update(Customer customer);
-        IDataResult<Customer> GetCustomerByCustomerId(int customerId);
+        IDataResult<Customer> GetCustomerById(int id);
         IDataResult<List<Customer>> GetAll();
         IDataResult<List<Customer>> GetCustomersByCompanyName(string companyName);
     }

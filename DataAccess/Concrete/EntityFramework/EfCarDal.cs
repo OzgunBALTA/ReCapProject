@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.DataAccess.EntityFramework;
 using Entities.DTOs;
+using DataAccess.Concrete.Context;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -20,12 +21,12 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from c in context.Cars
                              join b in context.Brands
-                             on c.BrandId equals b.BrandId
+                             on c.BrandId equals b.Id
                              join clr in context.Colors
-                             on c.ColorId equals clr.ColorId
+                             on c.ColorId equals clr.Id
                              select new CarDetailsDto
                              {
-                                 CarId = c.CarId,
+                                 CarId = c.Id,
                                  CarName = c.CarName,
                                  BrandName = b.BrandName,
                                  ColorName = clr.ColorName,
