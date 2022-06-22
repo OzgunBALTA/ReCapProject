@@ -14,9 +14,9 @@ namespace Entities.Concrete
         public int UserId { get; set; }
         public string CompanyName { get; set; }
 
-        
-        //ForeignKey
-        [ForeignKey("UserId")]
+
+
         public User User { get; set; }
+        public List<Rental> Rentals { get; set; }
     }
 }

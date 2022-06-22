@@ -27,5 +27,8 @@ namespace Business.Constants
         public static string UserDeleted = "Kullanıcı Silindi";
         public static string Updated = "Bilgiler Güncellendi";
         public static string MaintenanceTime = "Sistem Bakımda";
+        public static string ImageUploaded = "Resim Başarıyla Yüklendi";
+        public static string ImageDeleted = "Resim Silindi";
+        public static string ImageUpdated = "Resim Güncellendi";
     }
 }

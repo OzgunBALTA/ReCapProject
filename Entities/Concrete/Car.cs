@@ -19,11 +19,10 @@ namespace Entities.Concrete
         public string Description  { get; set; }
 
 
-        [ForeignKey("ColorId")]
-        public Color Color { get; set; }
-
-        [ForeignKey("BrandId")]
         public Brand Brand { get; set; }
+        public Color Color { get; set; }
+        public Rental Rental { get; set; }
+        public List<CarImage> CarImages { get; set; }
 
     }
 }
