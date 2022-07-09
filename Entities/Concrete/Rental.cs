@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,10 +16,12 @@ namespace Entities.Concrete
         public int CustomerId { get; set; }
 
         [DefaultValue(null)]
+        public DateTime RentalDate { get; set; }
+
+        [DefaultValue(null)]
         public DateTime ReturnDate { get; set; }
 
 
         public Car Car { get; set; }
-        public Customer Customer { get; set; }
     }
 }
