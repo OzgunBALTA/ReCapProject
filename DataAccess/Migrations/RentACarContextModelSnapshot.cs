@@ -173,6 +173,24 @@ namespace DataAccess.Migrations
                     b.ToTable("Colors");
                 });
 
+            modelBuilder.Entity("Entities.Concrete.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+                });
+
             modelBuilder.Entity("Entities.Concrete.Rental", b =>
                 {
                     b.Property<int>("Id")
@@ -196,6 +214,8 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("CarId")
                         .IsUnique();
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Rentals");
                 });
@@ -251,13 +271,21 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Rental", b =>
                 {
-                    b.HasOne("Entities.Concrete.Car", "Car")
+                    b.HasOne("Entities.Concrete.Car", "Cars")
                         .WithOne("Rental")
                         .HasForeignKey("Entities.Concrete.Rental", "CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Car");
+                    b.HasOne("Entities.Concrete.Customer", "Customer")
+                        .WithMany("Rentals")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cars");
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Core.Entities.Concrete.OperationClaim", b =>
@@ -285,6 +313,11 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concrete.Color", b =>
                 {
                     b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Customer", b =>
+                {
+                    b.Navigation("Rentals");
                 });
 #pragma warning restore 612, 618
         }

@@ -34,6 +34,20 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OperationClaims",
                 columns: table => new
                 {
@@ -149,8 +163,8 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CarId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
-                    RentalDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    RentalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -159,6 +173,12 @@ namespace DataAccess.Migrations
                         name: "FK_Rentals_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Rentals_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -185,6 +205,11 @@ namespace DataAccess.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Rentals_CustomerId",
+                table: "Rentals",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserOperationClaims_OperationClaimId",
                 table: "UserOperationClaims",
                 column: "OperationClaimId");
@@ -208,6 +233,9 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cars");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "OperationClaims");

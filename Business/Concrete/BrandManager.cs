@@ -23,7 +23,7 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         [CacheRemoveAspect("IBrandService.Get")]
         public IResult Add(Brand brand)
         {

@@ -23,12 +23,8 @@ namespace Business.Concrete
 
         public IResult Add(Color color)
         {
-            if (color.ColorName.Length > 1)
-            {
-                _colorDal.Add(color);
-                return new SuccessResult(Messages.ColorAdded);
-            }
-            return new ErrorResult(Messages.ColorNameInvalid);
+            _colorDal.Add(color);
+            return new SuccessResult(Messages.ColorAdded);
         }
 
         public IResult Delete(Color color)

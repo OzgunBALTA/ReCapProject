@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class CarImage : IEntity
+    public class Customer : IEntity
     {
         public int Id { get; set; }
-        public int CarId { get; set; }
-        public string ImagePath { get; set; }
-        public DateTime Date { get; set; }
-
-        public virtual Car Car { get; set; }
+        public int UserId { get; set; }
+        public string CompanyName { get; set; }
+        public virtual List<Rental> Rentals { get; set; }
     }
 }

@@ -14,14 +14,10 @@ namespace Entities.Concrete
         public int Id { get; set; }
         public int CarId { get; set; }
         public int CustomerId { get; set; }
-
-        [DefaultValue(null)]
         public DateTime RentalDate { get; set; }
-
-        [DefaultValue(null)]
         public DateTime ReturnDate { get; set; }
-
-
-        public Car Car { get; set; }
+        
+        public virtual Customer Customer { get; set; }
+        public virtual Car Cars { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +24,10 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            if (rental.ReturnDate > DateTime.Now)
+            if (rental.ReturnDate < DateTime.Now)
             {
                 return new ErrorResult(Messages.RentalAddingFailed);
             }
-
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
@@ -46,6 +46,11 @@ namespace Business.Concrete
         public IDataResult<Rental> GetRentalById(int id)
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
+        }
+
+        public IDataResult<List<RentalDetailsDto>> GetRentalDetails()
+        {
+            return new SuccessDataResult<List<RentalDetailsDto>>(_rentalDal.GetRentalDetails());
         }
 
         public IResult Update(Rental rental)

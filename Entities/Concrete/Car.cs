@@ -18,11 +18,10 @@ namespace Entities.Concrete
         public decimal DailyPrice { get; set; }
         public string Description  { get; set; }
 
-
-        public Brand Brand { get; set; }
-        public Color Color { get; set; }
-        public Rental Rental { get; set; }
-        public List<CarImage> CarImages { get; set; }
+        public virtual Brand Brand { get; set; }
+        public virtual Color Color { get; set; }
+        public virtual Rental Rental { get; set; }
+        public virtual List<CarImage> CarImages { get; set; }
 
     }
 }
